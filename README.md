@@ -30,4 +30,4 @@ Start the development sever via the command
 ```
 $ npm run dev
 ```
-
+The server will be running on [localhost:6000](http://localhost:6000)
