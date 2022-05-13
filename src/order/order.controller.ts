@@ -2,14 +2,15 @@ import { Request, Response, NextFunction } from "express";
 import { cartModel } from "../Cart/cart.model";
 import { newCustomFunction } from "../utils/custom.function";
 import { OrderService } from "./order.service";
-import { UserModel } from "../user/models/user.model";
 import { FlutterwaveDTO } from "../utils/types/futterwave.dto";
+import {v4 as uuidv4} from 'uuid';
+
 const service = new OrderService();
 
 export class Order {
   public createNewUserOrder = async (req: any | Request, res: Response) => {
     try {
-      const userOrder = await service.myNewOrder(req.user._id);
+      const userOrder = await service.myNewOrder(req.user._id, req.body)
       if (userOrder === "cart cannot be empty"){
         return res.status(404).json({message: userOrder})
       }
@@ -24,16 +25,26 @@ export class Order {
   public completeOrderController = async(req:any | Request, res:Response)=>{
     try {
      let fullname = `${req.user.firstName} ${req.user.lastName}`
+     let expiry = req.body.expiry
+     let expiryArray = expiry.split('/')
+    //  expiryArray[0]
+    //  expiryArray[1]
+
+
       const myOrder:FlutterwaveDTO = {
         card_number:req.body.card_number,
         cvv:req.body.cvv,
-        expiry_month:req.body.expiry_month,
-        expiry_year:req.body.expiry_year,
+        expiry_month:expiryArray[0],
+        expiry_year:expiryArray[1],
         email:req.user.email,
         fullname,
         phone_number:req.user.phone_number,
-        amount:req.body.amount
+        tx_ref:uuidv4(),
+        currency:"NGN"
       }
+      // user's firstname
+      // amount
+      // order id
     const newOrder = await service.completeOrderService(myOrder,req.params.id)
       return res.status(201).json(newOrder)
     } catch (err:any) {

@@ -5,7 +5,7 @@ export class FlutterwaveDTO {
     expiry_month!: string;
     expiry_year!: string;
     currency?: string = "NGN";
-    amount!: string;
+    amount?: string;
     fullname!: string;
     email!: string;
     phone_number!: string;

@@ -41,6 +41,7 @@
 		"@types/aws-sdk": "^2.7.0",
 		"@types/express": "^4.17.13",
 		"@types/joi": "^17.2.3",
+		"@types/mailgun-js": "^0.22.12",
 		"@types/morgan": "^1.9.3",
 		"@types/multer": "^1.4.7",
 		"@types/node": "^17.0.12",

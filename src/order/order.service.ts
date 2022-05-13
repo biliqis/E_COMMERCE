@@ -8,7 +8,7 @@ import { paymentService } from "../utils/flutterwave/flutterwave.service";
 import orderModel from "./order.model";
 
 export class OrderService {
-  public myNewOrder = async (id: string) => {
+  public myNewOrder = async (id: string, data:any| object) => {
     let userCart = [];
     const newUserCart = await cartService.getUserCart(id);
     if (newUserCart.length === 0) {
@@ -20,6 +20,7 @@ export class OrderService {
       quantity: newUserCart.length,
       userId: id,
       products: newUserCart,
+      address:data.address
     });
     await newOrder.save();
     await cartModel.deleteMany({ userId: id });
@@ -34,12 +35,14 @@ export class OrderService {
     if (!orderToBeCompleted) {
       return "not found";
     }
-    const Pay = await paymentService(details);
-    if (Pay.status === "success") {
-      Pay.message = "transaction successful";
+    const Pay = await paymentService({...details,amount:orderToBeCompleted.amount});
+    console.log(Pay)
+    // if (Pay.status === "success") {
+      // Pay.message = "transaction successful";
       // wallet.balance = wallet.balance + Number(req.body.amount);
       //await wallet.save();
       orderToBeCompleted.status = "completed";
+      orderToBeCompleted.phonenumber = details.phone_number
       await orderToBeCompleted.save();
       // const transactionObj: object = {
       //   user: user.userId,
@@ -48,10 +51,11 @@ export class OrderService {
       //   status: 'SUCCESS',
       //   reference: ref,
       // };
+
+      return { Pay, orderToBeCompleted};
     }
 
-    return { status: Pay.status, message: Pay.message, orderToBeCompleted};
-  };
+    
+  // };
 
-  public cancelOrder = async () => {};
 }

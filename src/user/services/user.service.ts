@@ -7,6 +7,7 @@ import { User } from "../interfaces/user.interface";
 import { WishListField } from "../../utils/types/user.types";
 import { LoginCredentials, SearchMethod } from "../../utils/types/user.types";
 import { Update } from "../../utils/types/user.types";
+import { userInfo } from "os";
 const expiresIn = process.env.JWT_EXP || "1d";
 const jwtSecretKey = process.env.JWT_SECRET! || "secret";
 
@@ -19,31 +20,29 @@ class UserService {
     });
   };
 
-  public userSignUp = async (
-    userInformation: User
-  ): Promise<typeof UserModel> => {
-    const user = await this.users.create(userInformation);
-    user.password = bcrypt.hashSync(userInformation.password, 10);
-    await user.save();
-    const userToken = this.generateJwt({
-      userId: user._Id,
-      roles: userInformation.role,
+  public registerNeWUser = async (userInfo: User) => {
+    const newUser = await this.users.create(userInfo);
+    newUser.password = bcrypt.hashSync(userInfo.password, 10);
+    await newUser.save();
+    const userUserToken = this.generateJwt({
+      userId: newUser._Id,
+      roles: userInfo.role,
     });
-    return user;
+    return newUser;
   };
 
-  public userLogin = async (credentials: LoginCredentials): Promise<object> => {
-    const user = await this.users
+  public userLogin = async (Credentials: LoginCredentials) => {
+    const newlyLoginUser = await this.users
       .findOne({
-        $or: [{ username: credentials.username }, { email: credentials.email }],
+        $or: [{ username: Credentials.username }, { email: Credentials.email }],
       })
       .select("+password");
-    if (!user) throw new Error("wrong credentials!");
+    if (!newlyLoginUser) throw new Error("wrong credential!");
     const token = this.generateJwt({
-      userId: user._id,
-      roles: user.role,
+      userId: newlyLoginUser._id,
+      roles: newlyLoginUser.role,
     });
-    return { user, token };
+    return { newlyLoginUser, token };
   };
 
   public updateUser = async (
@@ -66,12 +65,12 @@ class UserService {
     return this.users.findOne({ email: email });
   };
 
-  public createAWishList = async(id:string,myWish: WishListField)=>{
-    const newWishList = await this.users.findByIdAndUpdate(id,myWish,{new:true})
-    return newWishList
-  }
-
-
+  public createAWishList = async (id: string, myWish: WishListField) => {
+    const newWishList = await this.users.findByIdAndUpdate(id, myWish, {
+      new: true,
+    });
+    return newWishList;
+  };
 
   // public async findAllUser():Promise<User[]>{
   // 	const users:User[] = await this.users.find()

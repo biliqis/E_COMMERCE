@@ -7,7 +7,6 @@ export class ProductValidator {
       'string.base': '"productName" should be a type of \'text\'',
       'any.required': '"productName" is a required field',
     }),
-
     Description: Joi.string().required().messages({
       'string.base': '"Description" should be a type of \'text\'',
       'any.required': '"Description" is a required field',

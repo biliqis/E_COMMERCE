@@ -21,10 +21,7 @@ const orderSchema = new mongoose.Schema(
       type: Number,
     },
 
-    address: {
-      type: Object,
-    },
-
+    address: String,
     phonenumber: {
       type: String,
     },

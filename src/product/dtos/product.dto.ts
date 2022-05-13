@@ -6,4 +6,5 @@ export interface CreateProductDto{
   price: number;
   images: string[];
   materials: string;
+  userId:string
 }

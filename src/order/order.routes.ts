@@ -15,12 +15,14 @@ class orderRouter {
   private routes(): void {
     this.router.post(
       "/get-order",  authGuard.requireAuth, newController.createNewUserOrder
+      );
 
-      
-    );
+      this.router.post(
+        "/complete-order/:id",  authGuard.requireAuth, newController.completeOrderController)
+      }
 
   }
-}
+
 
 
   

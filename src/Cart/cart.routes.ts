@@ -17,11 +17,11 @@ class cartRouter {
       newController.CreateNewCart
     );
 
-    this.router.patch(
-      "/update-a-cart/:id",
-      authGuard.requireAuth,
-      newController.removingItemsFromCart
-    )
+    // this.router.patch(
+    //   "/update-a-cart/:id",
+    //   authGuard.requireAuth,
+    //   newController.removingItemsFromCart
+    // )
 
   }
 

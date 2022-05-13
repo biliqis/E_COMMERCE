@@ -17,7 +17,7 @@ export const paymentService = async (paymentDetails: FlutterwaveDTO) => {
         fullname: paymentDetails.fullname,
         email: paymentDetails.email,
         phone_number: paymentDetails.phone_number,
-        enckey: "611d0eda25a3c931863d92c4",
+        enckey: "FLWSECK_TEST437a39a29cca",
         authorization: {},
         tx_ref: paymentDetails.tx_ref, // This is a unique reference, unique to the particular transaction being carried out. It is generated when it is not provided by the merchant for every transaction.
     };

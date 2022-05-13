@@ -1,5 +1,4 @@
-import { NextFunction, Request, response, Response } from "express";
-import mongoose from "mongoose";
+import { NextFunction, Request, Response } from "express";
 import {
   LoginCredentials,
   Update,
@@ -19,7 +18,7 @@ class UserController {
   public userSignup = async (req: Request, res: Response) => {
     try {
       const userSignUpInformation: User = req.body;
-      const user = await this.userService.userSignUp(userSignUpInformation);
+      const user = await this.userService.registerNeWUser(userSignUpInformation);
       return res
         .status(200)
         .json({ message: "user Created successfully", user });

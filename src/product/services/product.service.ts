@@ -1,8 +1,6 @@
-import * as bcrypt from "bcrypt";
-import { ProductModel, ProductSchema } from "../product/models/product.model";
-import { CreateProductDto } from "../product/dtos/product.dto";
+import { ProductModel, ProductSchema } from "../models/product.model";
+import { CreateProductDto } from "../dtos/product.dto";
 import { Request, Response } from "express";
-import { FilterQuery } from "mongoose";
 const expiresIn = process.env.JWT_EXP || "1d";
 const jwtSecretKey = process.env.JWT_SECRET! || "secret";
 
@@ -30,6 +28,7 @@ class ProductService {
   public getSingleProduct = async (id: string) => {
     return await ProductModel.findById(id);
   };
+
 
   public deleteAProduct = async (id: string) => {
     const deleteExistingProduct = await this.product.findByIdAndDelete(id);

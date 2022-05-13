@@ -1,10 +1,10 @@
 import "dotenv/config";
 import express, { Application } from "express";
 //import indexRouter from './routes/v1/index'
-import indexRouter from './routes'
+import indexRouter from "./routes";
 import morgan from "morgan";
 import connectDB from "./db";
-
+const path = require("path");
 
 const app: Application = express();
 
@@ -16,7 +16,7 @@ app.use(morgan("dev"));
 const port: number | string = process.env.PORT || 4040;
 
 // Route declaration
-app.use('/api/v1',indexRouter);
+app.use("/api/v1", indexRouter);
 
 async function bootstrap(): Promise<void> {
   try {
