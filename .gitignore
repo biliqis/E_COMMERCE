@@ -90,6 +90,7 @@ junk
 .nuxt
 dist
 build
+junk
 
 # Gatsby files
 .cache/
