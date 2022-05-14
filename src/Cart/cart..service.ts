@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import { NextFunction, Request, response, Response } from "express";
 import { cartModel } from "./cart.model";
 import { Cart } from "../utils/types/schema.type";
