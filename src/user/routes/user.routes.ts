@@ -72,8 +72,8 @@ class userRouter {
 
     this.router.get(
       "/get-all-user",
-      authMiddleware.requireAuth,
-      authMiddleware.checkIfUserIsAdmin,
+      // authMiddleware.requireAuth,
+      //authMiddleware.checkIfUserIsAdmin,
       UserController.getAllUserFromDataBase
     );
 

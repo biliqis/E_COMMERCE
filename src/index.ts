@@ -8,14 +8,12 @@ const path = require("path");
 
 const app: Application = express();
 
-// middleware initialization
 app.use(express.json());
 
 app.use(morgan("dev"));
 
 const port: number | string = process.env.PORT || 4040;
 
-// Route declaration
 app.use("/api/v1", indexRouter);
 
 async function bootstrap(): Promise<void> {

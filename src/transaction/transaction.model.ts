@@ -1,5 +1,4 @@
 import mongoose, { Schema } from "mongoose";
-import { StatusEnum } from "../user/enums/transaction.enum";
 export const TransactionSchema = new Schema({
 	amount: {
 		type: String,
@@ -10,7 +9,7 @@ export const TransactionSchema = new Schema({
 	},
 
 	status: {
-		type: StatusEnum,
+		type: String,
 	},
     orderId : {
         type: Schema.Types.ObjectId, ref: 'Order'

@@ -16,19 +16,18 @@ class authMiddleware {
 			const decoded: any = jwt.verify(token, process.env.JWT_SECRET as string);
 			console.log(decoded);
 			const currentUser: any = await UserModel.findById(decoded.userId);
-			// console.log(currentUser)
+			 console.log(currentUser, "wereryt")
 			if (!currentUser) {
 				return res.status(401).json({ message: "logged out" });
 			}
 			req.user = currentUser;
-			//next();
+			next();
 		} catch (err: any) {
 			console.error(err);
 			return res
 				.status(401)
 				.json({ message: "Invalid token, sign-in to access this resource" });
 		}
-		next();
 	};
 
 	checkIfUserIsAdmin = (req: any, res: Response, next: NextFunction) => {

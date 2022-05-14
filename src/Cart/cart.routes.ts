@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { cartController } from "./cart.controller";
 import authGuard from "../middleware/authGuard";
-const newController = new cartController()
+const newController = new cartController();
 class cartRouter {
   public router: Router;
 
@@ -16,15 +16,7 @@ class cartRouter {
       authGuard.requireAuth,
       newController.CreateNewCart
     );
-
-    // this.router.patch(
-    //   "/update-a-cart/:id",
-    //   authGuard.requireAuth,
-    //   newController.removingItemsFromCart
-    // )
-
   }
-
 }
-  
+
 export default new cartRouter().router;

@@ -1,10 +1,11 @@
-import { TransactionDto } from "./transaction.dto";
-import { NextFunction, Request, Response } from "express";
-import { transactionService } from "./transaction.service";
+import { Request, Response } from "express";
+import { TransactionService } from "./transaction.service";
 
 export const TransactionController = {
-   async viewTransaction(req:Request, res:Response){
-       const transactionResult = await transactionService.viewAllUserTransaction(req.params.id)
-       return transactionResult
-   }
-}
+  async viewTransaction(req: Request, res: Response) {
+    const transactionResult = await TransactionService.viewAllUserTransaction(
+      req.params.id
+    );
+    return res.status(200).json(transactionResult);
+  },
+};
