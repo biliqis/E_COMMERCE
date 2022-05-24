@@ -4,7 +4,9 @@ import { FlutterwaveDTO } from "../utils/types/futterwave.dto";
 import { v4 as uuidv4 } from "uuid";
 import { TransactionService } from "../transaction/transaction.service";
 import { TransactionDto } from "../transaction/transaction.dto";
-import { StatusEnum } from "../user/enums/transaction.enum";
+import { EmailDto } from "../email/email.dto";
+import {EmailService} from '../email/email.service';
+import { StatusEnum } from "../transaction/transaction.enum";
 
 const service = new OrderService();
 
@@ -59,6 +61,20 @@ export class Order {
       };
 
       await TransactionService.createNewTransaction(transactioObj);
+      // send email
+      const emailData:EmailDto = {
+        receiver:req.user.email,
+        subject:"Notice of Payment",
+        template:"transaction",
+        data:
+          {
+            "firstName": req.user.firstName,
+            "amount": singleOrder.amount,
+            "orderId": singleOrder._id
+        }
+      }
+      const email = await EmailService.sendMail(emailData)
+      console.log(email)
       return res.status(201).json(newOrder);
     } catch (err: any) {
       console.error(err);

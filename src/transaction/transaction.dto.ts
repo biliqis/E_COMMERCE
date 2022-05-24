@@ -1,4 +1,4 @@
-import { StatusEnum } from "../user/enums/transaction.enum";
+import { StatusEnum } from "../transaction/transaction.enum
 
 export type TransactionDto = {
   userId: string;

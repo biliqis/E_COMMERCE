@@ -4,8 +4,6 @@ import { Cart } from "../utils/types/schema.type";
 import { Request, Response } from "express";
 import productService from "../product/services/product.service";
 import { myCart } from "../utils/types/find.cart";
-import { ProductModel } from "../product/models/product.model";
-import { userInfo } from "os";
 //instantiate the class
 const service = new cartService();
 
@@ -74,5 +72,6 @@ export class cartController {
     updatedCart.totalPrice = updatedCart.totalPrice - unitPrice;
     await updatedCart.save();
     return res.status(200).send({ message: "sucess", updatedCart });
-  };
+  }
+  
 }

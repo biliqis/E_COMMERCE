@@ -24,6 +24,12 @@ export const ProductSchema = new Schema({
     type: String,
   },
 
+  comment:[
+    {
+        type:mongoose.Schema.Types.ObjectId, ref:'comment'
+    }
+],
+
   userId: { type: Schema.Types.ObjectId, ref: "user" },
 });
 

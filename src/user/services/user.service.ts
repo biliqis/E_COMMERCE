@@ -1,13 +1,10 @@
 import * as jwt from "jsonwebtoken";
 import * as bcrypt from "bcryptjs";
 import { UserModel } from "../models/user.model";
-import { Request, Response } from "express";
 import { FilterQuery } from "mongoose";
 import { User } from "../interfaces/user.interface";
 import { WishListField } from "../../utils/types/user.types";
 import { LoginCredentials, SearchMethod } from "../../utils/types/user.types";
-import { Update } from "../../utils/types/user.types";
-import { userInfo } from "os";
 const expiresIn = process.env.JWT_EXP || "1d";
 const jwtSecretKey = process.env.JWT_SECRET! || "secret";
 

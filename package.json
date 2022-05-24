@@ -8,7 +8,9 @@
 		"build": "tsc --project ./",
 		"dev": "ts-node-dev src/index.ts",
 		"start": "node build/index.js",
-		"start:dev": "nodemon src/index.ts"
+		"start:dev": "nodemon src/index.ts",
+		"client" : "npm start --prefix frontened"
+		
 	},
 	"keywords": [],
 	"author": "",
