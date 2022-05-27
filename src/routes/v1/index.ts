@@ -10,10 +10,11 @@ class indexRouter {
 
   constructor() {
   this.router.use("/user", userRoutes);
+  this.router.use("/transaction", transactionRoutes)
   this.router.use("/product", productRoutes);
   this.router.use('/cart',cartRoutes)
   this.router.use("/order", orderRoutes)
-  this.router.use("/transaction", transactionRoutes)
+
   this.router.use("/comment", commentRoute)
 
   }

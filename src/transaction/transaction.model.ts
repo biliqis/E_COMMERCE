@@ -1,23 +1,36 @@
+import { number } from "joi";
 import mongoose, { Schema } from "mongoose";
-export const TransactionSchema = new Schema({
-	amount: {
+import { TransactionStatusEnum } from "./transaction.enum";
+export const TransactionSchema = new Schema(
+  {
+    amount: {
+      type: String,
+    },
+    TransactionId: {
+      type: String,
+    },
+
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+    },
+
+    transactionStatus: {
 		type: String,
+		enum: TransactionStatusEnum
 	},
 
-	userId: {
-	 type: Schema.Types.ObjectId, ref: 'user' 
-	},
+    orderId: {
+      type: Schema.Types.ObjectId,
+      ref: "Order",
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-	status: {
-		type: String,
-	},
-    orderId : {
-        type: Schema.Types.ObjectId, ref: 'Order'
-    }
-
-
-}, {
-    timestamps:true
-});
-
-export const TransactionModel = mongoose.model("transaction", TransactionSchema);
+export const TransactionModel = mongoose.model(
+  "transaction",
+  TransactionSchema
+);

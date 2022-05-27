@@ -6,7 +6,7 @@ import { TransactionService } from "../transaction/transaction.service";
 import { TransactionDto } from "../transaction/transaction.dto";
 import { EmailDto } from "../email/email.dto";
 import {EmailService} from '../email/email.service';
-import { StatusEnum } from "../transaction/transaction.enum";
+import { TransactionStatusEnum } from "../transaction/transaction.enum";
 
 const service = new OrderService();
 
@@ -54,13 +54,14 @@ export class Order {
         myOrder,
         req.params.id
       );
-      const transactioObj: TransactionDto = {
+      const transactionObj: TransactionDto = {
         userId: req.user._id,
+        TransactionId:req.user._id,
         amount: singleOrder.amount,
-        status: StatusEnum.COMPLETED,
+        transactionStatus: TransactionStatusEnum.COMPLETED,
       };
 
-      await TransactionService.createNewTransaction(transactioObj);
+      await TransactionService.createNewTransaction(transactionObj);
       // send email
       const emailData:EmailDto = {
         receiver:req.user.email,

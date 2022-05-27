@@ -12,6 +12,7 @@ export class EmailService {
   }
 
   static async sendMail(emailData: EmailDto) {
+    try {
     const mail = this.emailServiceConfig();
     const mailStruct = {
       from: envConfiguration.MAILGUN_FROM_EMAIL,
@@ -30,9 +31,10 @@ export class EmailService {
       statusCode: 200,
       message: "mail sent successfully!",
     };
+  } catch(err: any) {
+      console.error(err);
+      throw new Error("incorrect");
+    }
   }
-  catch(err: any) {
-    console.error(err);
-    throw new Error("incorrect");
-  }
+  
 }

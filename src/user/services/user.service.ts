@@ -69,10 +69,7 @@ class UserService {
     return newWishList;
   };
 
-  // public async findAllUser():Promise<User[]>{
-  // 	const users:User[] = await this.users.find()
-  // 	return  users
-  // }
+
 
   public async findUserById(id: string) {
     return await this.users.findById(id);

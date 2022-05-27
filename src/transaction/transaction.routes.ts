@@ -1,6 +1,8 @@
 import { Router } from "express";
+import authGuard from "../middleware/authGuard";
 
 import { TransactionController } from "./transaction.controller";
+
 
 
 
@@ -13,7 +15,8 @@ class transactionRouter {
     }
 
     private routes(): void {
-        this.router.get("/view-all-user-Transaction/:id", TransactionController.viewTransaction);
+        this.router.get("/view-transaction/:id", authGuard.requireAuth, TransactionController.viewTransaction);
+        this.router.get("/view-user-transactions", TransactionController.getAllTransactions);
 }  
 }
 
